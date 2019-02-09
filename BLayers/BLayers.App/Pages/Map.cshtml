@@ -1,0 +1,22 @@
+﻿@page "/map"
+
+@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
+
+<div class="card h-60">
+    <div class="card-header">
+        <h6>Blazor and OpenLayers JavaScript Interop</h6>
+    </div>
+    <div class="card-body p-0">
+        <div id="map"></div>
+    </div>
+</div>
+
+
+@functions {  
+
+    protected async override Task OnAfterRenderAsync()
+    {
+        await JSRuntime.InvokeAsync<object>("olMap.showMap");
+    }
+}
