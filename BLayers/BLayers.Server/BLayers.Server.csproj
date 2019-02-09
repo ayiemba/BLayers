@@ -8,6 +8,8 @@
     <Content Remove="wwwroot\js\map.js" />
     <Content Remove="wwwroot\lib\openlayers\ol.css" />
     <Content Remove="wwwroot\lib\openlayers\ol.js" />
+    <Content Remove="wwwroot\lib\openlayers\ol-layerswitcher.css" />
+    <Content Remove="wwwroot\lib\openlayers\ol-layerswitcher.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,6 +22,12 @@
     <EmbeddedResource Include="wwwroot\lib\openlayers\ol.js">
       <LogicalName>blazor:js:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="wwwroot\lib\openlayers\ol-layerswitcher.css">
+      <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wwwroot\lib\openlayers\ol-layerswitcher.js">
+      <LogicalName>blazor:js:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
@@ -29,5 +37,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Server" Version="3.0.0-preview-19075-0444" />
   </ItemGroup>
+
 
 </Project>

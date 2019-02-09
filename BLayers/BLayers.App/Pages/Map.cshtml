@@ -4,8 +4,24 @@
 @inject IJSRuntime JSRuntime
 
 <div class="card h-60">
-    <div class="card-header">
-        <h6>Blazor and OpenLayers JavaScript Interop</h6>
+    <div class="card-header d-flex-inline">
+        <span>
+            Blazor and OpenLayers JavaScript Interop. 
+            <small class="float-right">
+                Select Map:
+                <select id="layer-select">
+                    <option value="osm" selected>Open Street Map</option>
+                    <option value="normal.day">Normal Day</option>
+                    <option value="normal.day.transit">Normal Day Transit</option>
+                    <option value="pedestrian.day">Pedestrian Day</option>
+                    <option value="terrain.day">Terrain Day</option>
+                    <option value="satellite.day">Satellite Day</option>
+                    <option value="hybrid.day">Hybrid Day</option>
+                </select>
+            </small>
+        </span>
+
+
     </div>
     <div class="card-body p-0">
         <div id="map"></div>
@@ -13,7 +29,7 @@
 </div>
 
 
-@functions {  
+@functions {
 
     protected async override Task OnAfterRenderAsync()
     {
