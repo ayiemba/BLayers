@@ -1,9 +1,10 @@
 ﻿
-var appId = '[your appId from developers.here.com';
-var appCode = '[your appCode from developers.here.com]';
+var appId = '[here maps appId]';
+var appCode = '[here maps appCpde]';
 
 window.olMap = {
     showMap: function () {
+
         var HereLayers = [
             {
                 base: 'base',
@@ -65,6 +66,50 @@ window.olMap = {
             preload: Infinity,
             source: new ol.source.OSM()
         });
+
+        //loads data from a json file and creates features
+        function loadAirportData(data) {
+
+            var airportsSource = new ol.source.Vector();
+
+            // transform the geometries into the view's projection
+            var transform = ol.proj.getTransform('EPSG:4326', 'EPSG:3857');
+
+            // loop over the items in the response
+            for (var i = 0; i < data.length; i++) {
+               
+                //create a new feature with the item as the properties
+                var feature = new ol.Feature(data[i]);
+
+                // add a name property for later ease of access
+                feature.set('name', data[i].Name);
+
+                // create an appropriate geometry and add it to the feature
+                var coordinate = transform([parseFloat(data[i].Longitude), parseFloat(data[i].Latitude)]);
+                var geometry = new ol.geom.Point(coordinate);
+                feature.setGeometry(geometry);
+
+                // add the feature to the source
+                airportsSource.addFeature(feature);
+            }
+
+            return airportsSource;
+        }
+
+        var vectorLayer = new ol.layer.Vector({
+            source: loadAirportData(airportsdata),           
+            visible: true,
+            style: new ol.style.Style({
+                image: new ol.style.Circle( /** @type {olx.style.IconOptions} */({
+                    radius: 4,
+                    fill: new ol.style.Fill({
+                        color: '#0004ff'
+                    })
+                }))
+            })
+        });
+
+       
         
 
         var i, ii;
@@ -74,7 +119,7 @@ window.olMap = {
 
             if (layerDesc.scheme === "osm") {
                 layers.push(osmLayer);
-            }
+            }          
 
             if (layerDesc.scheme !== "osm") {
                 layers.push(new ol.layer.Tile({
@@ -90,7 +135,7 @@ window.olMap = {
             }
         }
 
-
+       
 
         var map = new ol.Map({
             target: 'map',
@@ -101,7 +146,7 @@ window.olMap = {
             })
         });
 
-        //map.addControl(new ol.control.LayerSwitcher());
+        map.addLayer(vectorLayer);       
 
         function createUrl(tpl, layerDesc) {
             return tpl
