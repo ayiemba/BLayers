@@ -101,7 +101,7 @@ window.olMap = {
             visible: true,
             style: new ol.style.Style({
                 image: new ol.style.Circle( /** @type {olx.style.IconOptions} */({
-                    radius: 4,
+                    radius: 5,
                     fill: new ol.style.Fill({
                         color: '#0004ff'
                     })
@@ -135,9 +135,39 @@ window.olMap = {
             }
         }
 
-       
+        /**
+        * Elements that make up the popup.
+        */
+        var container = document.getElementById('popup');
+        var content = document.getElementById('popup-content');
+        var closer = document.getElementById('popup-closer');
+
+
+        /**
+         * Create an overlay to anchor the popup to the map.
+         */
+        var overlay = new ol.Overlay({
+            element: container,
+            autoPan: true,
+            autoPanAnimation: {
+                duration: 250
+            }
+        });
+
+
+        /**
+         * Add a click handler to hide the popup.
+         * @return {boolean} Don't follow the href.
+         */
+        closer.onclick = function () {
+            overlay.setPosition(undefined);
+            closer.blur();
+            return false;
+        };
+
 
         var map = new ol.Map({
+            overlays: [overlay],
             target: 'map',
             layers: layers,
             view: new ol.View({
@@ -147,6 +177,21 @@ window.olMap = {
         });
 
         map.addLayer(vectorLayer);       
+
+
+        /**
+       * Add a click handler to the map to render the popup.
+       */
+        map.on('singleclick', function (evt) {
+            var coordinate = evt.coordinate;
+            var hdms = ol.coordinate.toStringHDMS(ol.proj.toLonLat(coordinate));
+
+            content.innerHTML = '<p>Latitude and Longitude:</p><code>' + hdms +
+                '</code>';
+            overlay.setPosition(coordinate);
+        });
+
+
 
         function createUrl(tpl, layerDesc) {
             return tpl
