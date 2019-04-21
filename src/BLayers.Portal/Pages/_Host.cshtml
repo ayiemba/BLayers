@@ -1,4 +1,7 @@
-﻿@page "{*clientPath}"
+﻿@page "/"
+@namespace BLayers.Portal.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +19,7 @@
               crossorigin="anonymous"
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
-    
+
     <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link href="lib/openlayers/ol.css" type="text/css" rel="stylesheet" />
     <link href="lib/openlayers/ol-layerswitcher.css" />
@@ -24,13 +27,13 @@
     <script src="data.js"></script>
 </head>
 <body>
-    
+
     <app>
-        <div class="loading-bar"></div>
+        @*<div class="loading-bar"></div>*@
         @(await Html.RenderComponentAsync<App>())
     </app>
 
-    <script src="_framework/components.server.js"></script>
+    <script src="_framework/blazor.server.js"></script>
 
     <script src="lib/openlayers/ol.js"></script>
     <script src="lib/openlayers/ol-layerswitcher.js"></script>
