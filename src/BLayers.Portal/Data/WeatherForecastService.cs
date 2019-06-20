@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BLayers.Portal.Services
+namespace BLayers.Portal.Data
 {
     public class WeatherForecastService
     {
