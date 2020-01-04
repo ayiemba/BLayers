@@ -1,5 +1,6 @@
-@page "/fetchdata"
-@using BLayers.Portal.Data
+﻿@page "/fetchdata"
+
+@using BLayers.Portal31.Data
 @inject WeatherForecastService ForecastService
 
 <h1>Weather forecast</h1>
@@ -36,7 +37,7 @@ else
 }
 
 @code {
-    WeatherForecast[] forecasts;
+    private WeatherForecast[] forecasts;
 
     protected override async Task OnInitializedAsync()
     {

@@ -1,0 +1,47 @@
+﻿@page "/"
+@namespace BLayers.Portal31.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BLayers.Portal31</title>
+    <base href="~/" />
+
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="lib/openlayers/ol.css" type="text/css" rel="stylesheet" />
+    <link href="lib/openlayers/ol-layerswitcher.css" />
+    <link href="css/site.css" rel="stylesheet" />
+    <script src="data.js"></script>
+
+</head>
+<body>
+    <app>
+        @*<component type="typeof(App)" render-mode="ServerPrerendered" />*@
+        @(await Html.RenderComponentAsync<App>(RenderMode.Server))
+    </app>
+
+    <div id="blazor-error-ui">
+        <environment include="Staging,Production">
+            An error has occurred. This application may no longer respond until reloaded.
+        </environment>
+        <environment include="Development">
+            An unhandled exception has occurred. See browser dev tools for details.
+        </environment>
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+
+    <script src="_framework/blazor.server.js"></script>
+
+    <script src="lib/openlayers/ol.js"></script>
+    <script src="lib/openlayers/ol-layerswitcher.js"></script>
+    <script src="js/map.js"></script>
+
+</body>
+</html>
