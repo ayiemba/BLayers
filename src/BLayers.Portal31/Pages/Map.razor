@@ -6,7 +6,7 @@
 <div class="card h-60">
     <div class="card-header d-flex-inline">
         <span>
-            Razor Components and OpenLayers JavaScript Interop basic example. 
+            Razor Components and OpenLayers JavaScript Interop basic example.
             <small class="float-right">
                 Select Map:
                 <select id="layer-select">
@@ -16,7 +16,7 @@
                     <option value="pedestrian.day">Pedestrian Day</option>
                     <option value="terrain.day">Terrain Day</option>
                     <option value="satellite.day">Satellite Day</option>
-                    <option value="hybrid.day">Hybrid Day</option>                   
+                    <option value="hybrid.day">Hybrid Day</option>
                 </select>
             </small>
         </span>
@@ -35,8 +35,15 @@
 
 @code {
 
-    protected async Task OnAfterRenderAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await JSRuntime.InvokeAsync<object>("olMap.showMap");
+        if (firstRender)
+            await JSRuntime.InvokeAsync<object>("olMap.showMap");
+            //await JSRuntime.InvokeVoidAsync("olMap.showMap");
     }
+
+    //private void OnAfterRender()
+    //{
+    //    JSRuntime.InvokeAsync<object>("olMap.showMap");
+    //}
 }
