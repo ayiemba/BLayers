@@ -186,8 +186,8 @@ window.olMap = {
             var coordinate = evt.coordinate;
             var hdms = ol.coordinate.toStringHDMS(ol.proj.toLonLat(coordinate));
 
-            content.innerHTML = '<p>Latitude and Longitude:</p><code>' + hdms +
-                '</code>';
+            content.innerHTML = '<div style="background-color:black;color:white;padding:20px;"><p>Latitude and Longitude:</p><code>' + hdms +
+                '</code></div>';
             overlay.setPosition(coordinate);
         });
 
